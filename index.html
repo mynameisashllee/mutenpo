@@ -40,28 +40,28 @@
         if (seconds < 10) {
           seconds = "0" + seconds;
         }
-        if (hours == 1 || hours == 2) {
-          if (minutes >= 3) {
-            minutes = "mute";
-            if (seconds >= 3) {
-              seconds = "mute";
-            }
-          }
-        } else {
+        if (hours == 01 || hours == 02) {
             if (minutes >= 3) {
                 minutes = "mute";
+            }
             if (seconds >= 3) {
                 seconds = "mute";
             }
-          }
+        } else {
             hours = "mute";
-          minutes = "mute";
+            if (minutes >= 3) {
+                minutes = "mute";
+          }
+            if (seconds >= 3) {
+                seconds = "mute";
+            }
         }
         var time = hours + ":" + minutes + ":" + seconds;
         document.getElementById("clock").innerHTML = time;
       }
       updateClock();
       setInterval(updateClock, 1000);
+
 
     </script>
   </body>
