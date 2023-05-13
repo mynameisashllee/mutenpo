@@ -38,11 +38,13 @@
         if (theme_toggle.checked) {
           r.style.setProperty('--col_bg', '#121212');
           r.style.setProperty('--col_fg', '#ffffff');
+          r.style.setProperty('--col_accent', '#282828');
           localStorage.setItem("theme", "dark");
           document.cookie = "theme=dark";
         } else {
           r.style.setProperty('--col_bg', '#ffffff');
           r.style.setProperty('--col_fg', '#000000');
+          r.style.setProperty('--col_accent', '#e6e6e6');
           localStorage.setItem("theme", "light");
           }
       }

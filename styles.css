@@ -14,6 +14,7 @@
   font-family: 'wakuwaku', sans-serif;
   --col_bg: #ffffff;
   --col_fg: #000000;
+  --col_accent: #e6e6e6;
 }
 
 body {
