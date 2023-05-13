@@ -24,7 +24,20 @@
           infoDiv.style.display = "none";
         }
       });  
-        
+
+      function toWord(number){
+         switch (number) {
+          case 0:
+            return "ala";
+          case 1:
+            return "wan";
+          case 2:
+            return "tu";
+          default:
+            return "mute";
+        }
+      }
+
       function updateClock() {
         var now = new Date();
         var hours = now.getHours();
@@ -34,47 +47,9 @@
         if (hours > 12) {
             hours -= 12;
         }
-        switch (hours) {
-          case 0:
-            hours = "ala";
-            break;
-          case 1:
-            hours = "wan";
-            break;
-          case 2:
-            hours = "tu";
-            break;
-          default:
-            hours = "mute";
-        }
-
-        switch (minutes) {
-          case 0:
-            minutes = "ala";
-            break;
-          case 1:
-            minutes = "wan";
-            break;
-          case 2:
-            minutes = "tu";
-            break;
-          default:
-            minutes = "mute";
-        }
-
-        switch (seconds) {
-          case 0:
-            seconds = "ala";
-            break;
-          case 1:
-            seconds = "wan";
-            break;
-          case 2:
-            seconds = "tu";
-            break;
-          default:
-            seconds = "mute";
-        }
+        hours = toWord(hours);
+        minutes = toWord(minutes);
+        seconds = toWord(seconds);
 
         var time = hours + ":" + minutes + ":" + seconds;
         document.getElementById("clock").innerHTML = time;
