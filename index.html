@@ -14,8 +14,8 @@
         <p>ni li ilo tenpo pi pali ala. ni li pona ala tawa sina la o moku e kala ike</p>
     </div>
     <script>
-        var infoIcon = document.getElementById("info-icon");
-        var infoDiv = document.getElementById("info-div");
+      var infoIcon = document.getElementById("info-icon");
+      var infoDiv = document.getElementById("info-div");
 
       infoIcon.addEventListener("click", function() {
         if (infoDiv.style.display === "none") {
@@ -23,49 +23,65 @@
         } else {
           infoDiv.style.display = "none";
         }
-      });
-        
+      });  
         
       function updateClock() {
         var now = new Date();
         var hours = now.getHours();
         var minutes = now.getMinutes();
         var seconds = now.getSeconds();
-        if (hours < 10) {
-          hours = "0" + hours;
-        }
+
         if (hours > 12) {
             hours -= 12;
         }
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-        if (hours == 01 || hours == 02) {
-            if (minutes >= 3) {
-                minutes = "mute";
-            }
-            if (seconds >= 3) {
-                seconds = "mute";
-            }
-        } else {
+        switch (hours) {
+          case 0:
+            hours = "ala";
+            break;
+          case 1:
+            hours = "wan";
+            break;
+          case 2:
+            hours = "tu";
+            break;
+          default:
             hours = "mute";
-            if (minutes >= 3) {
-                minutes = "mute";
-          }
-            if (seconds >= 3) {
-                seconds = "mute";
-            }
         }
+
+        switch (minutes) {
+          case 0:
+            minutes = "ala";
+            break;
+          case 1:
+            minutes = "wan";
+            break;
+          case 2:
+            minutes = "tu";
+            break;
+          default:
+            minutes = "mute";
+        }
+
+        switch (seconds) {
+          case 0:
+            seconds = "ala";
+            break;
+          case 1:
+            seconds = "wan";
+            break;
+          case 2:
+            seconds = "tu";
+            break;
+          default:
+            seconds = "mute";
+        }
+
         var time = hours + ":" + minutes + ":" + seconds;
         document.getElementById("clock").innerHTML = time;
       }
+      
       updateClock();
-      setInterval(updateClock, 1000);
-
-
+      setInterval(updateClock, 500);
     </script>
   </body>
 </html>
