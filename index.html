@@ -3,11 +3,17 @@
   <head>
     <title>mutenpo</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="icon" href="tenpo.ico" type="image/x-icon">
-
+    <link rel="stylesheet" type="text/css" href="switch.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg">
   </head>
   <body>
     <div id="clock"></div>
+    <div id="theme-toggle">
+      <label class="switch">
+        <input type="checkbox" id="theme-toggle-switch">
+        <span class="slider round"></span>
+      </label>
+    </div>
     <div id="info-icon"></div>
     <div id="info-div">
         <p>this is a useless clock. if you don't like it, cry</p>
@@ -16,6 +22,7 @@
     <script>
       var infoIcon = document.getElementById("info-icon");
       var infoDiv = document.getElementById("info-div");
+      var theme_toggle = document.getElementById("theme-toggle-switch");
 
       infoIcon.addEventListener("click", function() {
         if (infoDiv.style.display != "block") {
@@ -23,7 +30,27 @@
         } else {
           infoDiv.style.display = "none";
         }
-      });  
+      });
+
+      theme_toggle.onchange = function () {
+        var r = document.querySelector(':root');
+
+        if (theme_toggle.checked) {
+          r.style.setProperty('--col_bg', '#121212');
+          r.style.setProperty('--col_fg', '#ffffff');
+          localStorage.setItem("theme", "dark");
+          document.cookie = "theme=dark";
+        } else {
+          r.style.setProperty('--col_bg', '#ffffff');
+          r.style.setProperty('--col_fg', '#000000');
+          localStorage.setItem("theme", "light");
+          }
+      }
+
+      if(localStorage.getItem("theme") == "dark") {
+        theme_toggle.checked = true;
+        theme_toggle.onchange();
+      }
 
       function toWord(number){
          switch (number) {
@@ -54,7 +81,7 @@
         var time = hours + ":" + minutes + ":" + seconds;
         document.getElementById("clock").innerHTML = time;
       }
-      
+
       updateClock();
       setInterval(updateClock, 500);
     </script>

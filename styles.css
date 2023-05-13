@@ -1,39 +1,72 @@
 @font-face {
-    font-family: 'wakuwaku';
-    src: url('wakuwaku.otf');
+  font-family: 'wakuwaku';
+  src: url('wakuwaku.woff2');
 }
 
-* {
-    font-family: 'wakuwaku', sans-serif;
+@font-face {
+  font-family: "sitelen seli kiwen";
+  font-style: normal;
+  font-weight: 400;
+  src: url('sitelenselikiwenasuki.woff2');
 }
+
+:root {
+  font-family: 'wakuwaku', sans-serif;
+  --col_bg: #ffffff;
+  --col_fg: #000000;
+}
+
+body {
+  color: var(--col_fg);
+  background: var(--col_bg);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.sitelenpona {
+  grid-area: sitelenpona;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "sitelen seli kiwen";
+}
+
 #clock {
-    font-size: 3em;
-    text-align: center;
-    margin-top: 20%;
-    }
+  font-size: 3em;
+  text-align: center;
+  margin-top: 20%;
+}
+
+#theme-toggle {
+  position: fixed;
+  display: flex;
+  bottom: 20px;
+  left: 20px;
+}
 
 #info-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-image: url('info-icon.png');
-    background-size: cover;
-    cursor: pointer;
-    }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-image: url('info-icon.svg');
+  background-size: cover;
+  mix-blend-mode: difference;
+  cursor: pointer;
+}
 
 #info-div {
-    display: none;
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 250px;
-    height: auto;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    font-size: 1em;
-    text-align: justify;
-      }
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 250px;
+  height: auto;
+  background-color: var(--col_bg);
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  font-size: 1em;
+  text-align: justify;
+}
