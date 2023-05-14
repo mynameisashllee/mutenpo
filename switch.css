@@ -1,0 +1,50 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 50px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 34px;
+  background-color: var(--col_accent);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  content: "walo";
+  display: flex;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  left: 5px;
+  bottom: 5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--col_bg);
+  color: var(--col_fg);
+  font-family: 'sitelen seli kiwen';
+  font-size: 30px;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked + .slider:before {
+  content: "pimeja";
+  -webkit-transform: translateX(30px);
+  -ms-transform: translateX(30px);
+  transform: translateX(30px);
+}
