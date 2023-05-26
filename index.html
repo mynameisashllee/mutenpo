@@ -2,69 +2,106 @@
 <html>
   <head>
     <title>mutenpo</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="stylesheet" type="text/css" href="switch.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="switch.css"/>
+    <link rel="stylesheet" type="text/css" href="select.css"/>
     <link rel="icon" href="favicon.svg" type="image/svg">
+    <script type="text/javascript" src="nanpa-pona.js"></script>
   </head>
+
   <body>
     <div id="clock"></div>
+
+    <div id="style-bar">
+      <div class="select-wrapper">
+        <span class="select-text sitelenpona">nasin+nanpa</span>
+        <select id ="style-selector" class="sitelenpona">
+          <option value="tp" title="pu simple">toki-pona</option>
+          <option value="ts" title="pu advanced">toki-pona suli</option>
+          <option value="kj" title="base-6 number system based on the word kijetesantakalu">kijetesantakalu</option>
+        </select>
+      </div>
+
+      <div class="select-wrapper">
+        <span class="select-text sitelenpona">sitelen</span>
+        <select id="style-variant" class="sitelenpona">
+          <option value="tp">toki-pona</option>
+          <option value="sp">sitelen-pona</option>
+          <option value="ar">ARABIC</option>
+        </select>
+      </div>
+    </div>
+
     <div id="theme-toggle">
-      <label class="switch">
-        <input type="checkbox" id="theme-toggle-switch">
-        <span class="slider round"></span>
+      <label class="switch sitelenpona">
+        <input type="checkbox" id="theme-toggle-slider">
+        <span class="slider"></span>
       </label>
     </div>
+
     <div id="info-icon"></div>
     <div id="info-div">
         <p>this is a useless clock. if you don't like it, cry</p>
         <p>ni li ilo tenpo pi pali ala. ni li pona ala tawa sina la o moku e kala ike</p>
     </div>
+
     <script>
+      var clock = document.getElementById("clock");
+      var theme_toggle = document.getElementById("theme-toggle-slider");
+      var style_selector = document.getElementById("style-selector");
+      var style_variant = document.getElementById("style-variant");
       var infoIcon = document.getElementById("info-icon");
       var infoDiv = document.getElementById("info-div");
-      var theme_toggle = document.getElementById("theme-toggle-switch");
 
+      // toggle info-box
       infoIcon.addEventListener("click", function() {
-        if (infoDiv.style.display != "block") {
+        if (infoDiv.style.display != "block")
           infoDiv.style.display = "block";
-        } else {
+        else
           infoDiv.style.display = "none";
+      });
+
+      // make sure only valid states are ever selected.
+      // nasin nanpa kijetesantakalu doesn't make any sense in arabic.
+      style_selector.addEventListener("change", function() {
+        var optionToDisable = style_variant.querySelector('option[value="ar"]');
+        if (optionToDisable) {
+          var is_kj = style_selector.value == "kj";
+          optionToDisable.disabled = is_kj;
+          if (is_kj && style_variant.selectedIndex === optionToDisable.index)
+            style_variant.selectedIndex = 0;
         }
+      });
+
+      style_variant.addEventListener("change", function() {
+        var sitelen_pona = style_variant.value == "sp";
+        if(sitelen_pona)
+          clock.classList.add("sitelenpona");
+        else
+          clock.classList.remove("sitelenpona");
       });
 
       theme_toggle.onchange = function () {
         var r = document.querySelector(':root');
-
         if (theme_toggle.checked) {
           r.style.setProperty('--col_bg', '#121212');
           r.style.setProperty('--col_fg', '#ffffff');
           r.style.setProperty('--col_accent', '#282828');
           localStorage.setItem("theme", "dark");
-          document.cookie = "theme=dark";
         } else {
           r.style.setProperty('--col_bg', '#ffffff');
           r.style.setProperty('--col_fg', '#000000');
           r.style.setProperty('--col_accent', '#e6e6e6');
           localStorage.setItem("theme", "light");
-          }
+        }
       }
 
+      // load stored theme
       if(localStorage.getItem("theme") == "dark") {
         theme_toggle.checked = true;
         theme_toggle.onchange();
-      }
-
-      function toWord(number){
-         switch (number) {
-          case 0:
-            return "ala";
-          case 1:
-            return "wan";
-          case 2:
-            return "tu";
-          default:
-            return "mute";
-        }
       }
 
       function updateClock() {
@@ -73,15 +110,15 @@
         var minutes = now.getMinutes();
         var seconds = now.getSeconds();
 
-        if (hours > 12) {
+        if (hours > 12)
             hours -= 12;
-        }
-        hours = toWord(hours);
+
+        hours   = toWord(hours);
         minutes = toWord(minutes);
         seconds = toWord(seconds);
 
-        var time = hours + ":" + minutes + ":" + seconds;
-        document.getElementById("clock").innerHTML = time;
+        var time = hours + ":<wbr>" + minutes + ":<wbr>" + seconds;
+        clock.innerHTML = time;
       }
 
       updateClock();

@@ -1,0 +1,27 @@
+.select-wrapper {
+  display: flex;
+  height: 50px;
+  width: max-content;
+  padding-inline: 15px;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--col_accent);
+}
+
+.select-text {
+  margin-right: 5px;
+  font-size: 50px;
+}
+select {
+  padding-inline: 5px;
+  border-width: 1px;
+  border-color: var(--col_bg);
+  border-radius: 12px;
+  font-size: 30px;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: var(--col_fg);
+  background: var(--col_accent);
+}
+
